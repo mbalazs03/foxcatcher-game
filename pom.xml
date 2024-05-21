@@ -6,11 +6,17 @@
     <artifactId>homework-template-project</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <description><!-- TODO: a brief description of your project --></description>
+    <description>
+        The game is played on a chessboard with 4 dark pawns (dogs) and 1 light pawn (fox).
+        One player controls the dogs, while the other controls the fox. The fox can move diagonally in any direction,
+        while the dogs can only move diagonally forward. The player controlling the fox wins if they lead the pawn
+        behind the dogs. The player controlling the dogs wins
+        if they force the fox into a position where it cannot move.
+    </description>
     <developers>
         <developer>
-            <name><!-- TODO: your full name --></name>
-            <email><!-- TODO: your email address --></email>
+            <name>Margitai Balázs</name>
+            <email>balazsmargitai@gmail.com</email>
             <organization>Faculty of Informatics, University of Debrecen</organization>
             <organizationUrl>https://inf.unideb.hu/</organizationUrl>
         </developer>
