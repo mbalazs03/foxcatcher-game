@@ -2,6 +2,7 @@ package foxcatcher.controller;
 
 import foxcatcher.model.FoxCatcherGameState;
 import foxcatcher.model.Position;
+
 import javafx.beans.binding.ObjectBinding;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
@@ -58,9 +59,9 @@ public class NewGameController {
         var field = (StackPane) event.getSource();
         var row = GridPane.getRowIndex(field);
         var col = GridPane.getColumnIndex(field);
-        System.out.printf("Click on square (%d,%d)%n", row, col);
+        System.out.printf("Click on field (%d,%d)%n", row, col);
         selector.select(new Position(row, col));
-        if (selector.isReadyToMove()) {
+        if (selector.isReadyToMove() && !selector.isInvalidSelection()) {
             selector.makeMove();
         }
     }

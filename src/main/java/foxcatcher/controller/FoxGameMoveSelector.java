@@ -2,7 +2,7 @@ package foxcatcher.controller;
 
 import foxcatcher.model.FoxCatcherGameState;
 import foxcatcher.model.Position;
-import game.State;
+
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 

@@ -3,6 +3,7 @@ package foxcatcher.controller;
 
 import foxcatcher.model.FoxCatcherGameState;
 import foxcatcher.model.Position;
+
 import game.console.TwoPhaseMoveGame;
 
 import java.util.Scanner;

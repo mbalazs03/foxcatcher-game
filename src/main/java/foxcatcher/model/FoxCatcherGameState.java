@@ -1,6 +1,7 @@
 package foxcatcher.model;
 
 import game.TwoPhaseMoveState;
+
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
 public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
 
     public static final int BOARD_SIZE = 8;
-    private ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
+    private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private Player player;
 
     public FoxCatcherGameState() {
@@ -71,7 +72,7 @@ public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
 
     @Override
     public boolean isLegalToMoveFrom(Position from) {
-        return isOnBoard(from) && !isEmpty(from);
+        return isOnBoard(from) && !isEmpty(from) && canMoveWith(from) && !isGameOver();
     }
 
     @Override
@@ -86,12 +87,12 @@ public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
     public void makeMove(Position from, Position to) {
         setField(to, getField(from));
         setField(from, Field.EMPTY);
-        player = player.opponent();
+        player = getNextPlayer();
     }
 
     @Override
     public Player getNextPlayer() {
-        return player;
+        return player.opponent();
     }
 
     @Override
@@ -168,6 +169,13 @@ public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
 
     private boolean isFirstPlayer() {
         return player == Player.PLAYER_1;
+    }
+
+    private boolean canMoveWith(Position from) {
+        if (isFirstPlayer() && getField(from) == Field.LIGHT) {
+            return true;
+        }
+        return !isFirstPlayer() && getField(from) == Field.DARK;
     }
 
     private boolean isFoxTrapped(Position foxPosition) {
