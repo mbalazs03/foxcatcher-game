@@ -1,6 +1,7 @@
 package foxcatcher.model;
 
 import game.TwoPhaseMoveState;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import java.util.ArrayList;
@@ -11,12 +12,13 @@ import java.util.Objects;
 public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
 
     public static final int BOARD_SIZE = 8;
-    private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
+    private ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private Player player;
 
     public FoxCatcherGameState() {
+        /*
         for (var i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
+            for (var j = 0; j < BOARD_SIZE; j++) {
                 board[i][j] = new ReadOnlyObjectWrapper<>(Field.EMPTY);
             }
         }
@@ -25,8 +27,46 @@ public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
         board[7][3] = new ReadOnlyObjectWrapper<>(Field.DARK);
         board[7][5] = new ReadOnlyObjectWrapper<>(Field.DARK);
         board[7][7] = new ReadOnlyObjectWrapper<>(Field.DARK);
+        */
+        /*
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            for (var j = 0; j < BOARD_SIZE; j++) {
+                switch (i) {
+                    case 0:
+                        if (j == 2) {
+                            board[i][j] = new ReadOnlyObjectWrapper<>(Field.LIGHT);
+                        } else {
+                            board[i][j] = new ReadOnlyObjectWrapper<>(Field.EMPTY);
+                        }
+                        break;
+                    case 7:
+                        if (j == 1 || j == 3 || j == 5 || j == 7) {
+                            board[i][j] = new ReadOnlyObjectWrapper<>(Field.DARK);
+                        } else {
+                            board[i][j] = new ReadOnlyObjectWrapper<>(Field.EMPTY);
+                        }
+                        break;
+                    default:
+                        board[i][j] = new ReadOnlyObjectWrapper<>(Field.EMPTY);
+                        break;
+                }
+            }
+        }
 
-        player =Player.PLAYER_1;
+        player = Player.PLAYER_1;
+
+         */
+
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            for (var j = 0; j < BOARD_SIZE; j++) {
+                board[i][j] = new ReadOnlyObjectWrapper<>(Field.EMPTY);
+            }
+        }
+        board[0][2] = new ReadOnlyObjectWrapper<>(Field.LIGHT);
+        for (var i = 1; i < 8; i += 2) {
+            board[7][i] = new ReadOnlyObjectWrapper<>(Field.DARK);
+        }
+        player = Player.PLAYER_1;
     }
 
     @Override
@@ -154,6 +194,10 @@ public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
             }
         }
         return hounds == 4;
+    }
+
+    public ReadOnlyObjectProperty<Field> fieldProperty(int i, int j) {
+        return board[i][j].getReadOnlyProperty();
     }
 
     @Override
