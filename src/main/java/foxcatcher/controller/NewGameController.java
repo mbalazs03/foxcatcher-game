@@ -15,7 +15,7 @@ import javafx.scene.shape.Circle;
 public class NewGameController {
     @FXML
     private GridPane board;
-    private final FoxCatcherGameModel model = new FoxCatcherGameModel();
+    private FoxCatcherGameModel model = new FoxCatcherGameModel();
     private final FoxGameMoveSelector selector = new FoxGameMoveSelector(model);
 
 
