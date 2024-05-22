@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="322.0" prefWidth="338.0" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foxcatcher.controller.HomeController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="459.0" prefWidth="662.0" spacing="15.0" styleClass="button-container">
+         <Label prefHeight="132.0" prefWidth="462.0" styleClass="label-title" text="Fox Catcher Game" textAlignment="CENTER" />
+         <Button onAction="#onNewGame" styleClass="button" text="New Game">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin></Button>
+         <Button styleClass="button" text="Load Game">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin></Button>
+         <Button styleClass="button" text="Leaderboard">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin></Button>
+         <Button onAction="#onQuit" styleClass="button" text="Quit">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin></Button>
+      </VBox>
+   </children>
+</AnchorPane>
