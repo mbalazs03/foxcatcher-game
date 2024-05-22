@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
+public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
 
     public static final int BOARD_SIZE = 8;
     private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private Player player;
 
-    public FoxCatcherGameState() {
+    public FoxCatcherGameModel() {
         /*
         for (var i = 0; i < BOARD_SIZE; i++) {
             for (var j = 0; j < BOARD_SIZE; j++) {
@@ -212,7 +212,7 @@ public class FoxCatcherGameState implements TwoPhaseMoveState<Position> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FoxCatcherGameState that = (FoxCatcherGameState) o;
+        FoxCatcherGameModel that = (FoxCatcherGameModel) o;
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (board[i][j].get() != that.board[i][j].get()) {

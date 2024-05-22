@@ -1,7 +1,7 @@
 package foxcatcher.controller;
 
 
-import foxcatcher.model.FoxCatcherGameState;
+import foxcatcher.model.FoxCatcherGameModel;
 import foxcatcher.model.Position;
 
 import game.console.TwoPhaseMoveGame;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ConsoleGame {
 
     public static void main(String[] args) {
-        FoxCatcherGameState state = new FoxCatcherGameState();
+        FoxCatcherGameModel state = new FoxCatcherGameModel();
         TwoPhaseMoveGame<Position> game = new TwoPhaseMoveGame<>(state, ConsoleGame::parseMove);
         game.start();
     }

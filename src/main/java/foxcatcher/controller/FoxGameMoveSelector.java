@@ -1,6 +1,6 @@
 package foxcatcher.controller;
 
-import foxcatcher.model.FoxCatcherGameState;
+import foxcatcher.model.FoxCatcherGameModel;
 import foxcatcher.model.Position;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -14,13 +14,13 @@ public class FoxGameMoveSelector {
         READY_TO_MOVE
     }
 
-    private FoxCatcherGameState model;
+    private FoxCatcherGameModel model;
     private ReadOnlyObjectWrapper<Phase> phase =new ReadOnlyObjectWrapper<>(Phase.SELECT_FROM);
     private boolean invalidSelection = false;
     private Position from;
     private Position to;
 
-    public FoxGameMoveSelector(FoxCatcherGameState model) {
+    public FoxGameMoveSelector(FoxCatcherGameModel model) {
         this.model = model;
     }
 

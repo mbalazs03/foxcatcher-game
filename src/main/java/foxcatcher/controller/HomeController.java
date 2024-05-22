@@ -20,6 +20,7 @@ public class HomeController {
         try {
             loadStage(actionEvent);
         } catch (IOException e) {
+            System.err.println("Error creating new game!");
         }
     }
 

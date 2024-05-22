@@ -1,6 +1,6 @@
 package foxcatcher.controller;
 
-import foxcatcher.model.FoxCatcherGameState;
+import foxcatcher.model.FoxCatcherGameModel;
 import foxcatcher.model.Position;
 
 import javafx.beans.binding.ObjectBinding;
@@ -15,8 +15,8 @@ import javafx.scene.shape.Circle;
 public class NewGameController {
     @FXML
     private GridPane board;
-    private FoxCatcherGameState model = new FoxCatcherGameState();
-    private FoxGameMoveSelector selector = new FoxGameMoveSelector(model);
+    private final FoxCatcherGameModel model = new FoxCatcherGameModel();
+    private final FoxGameMoveSelector selector = new FoxGameMoveSelector(model);
 
 
     @FXML
