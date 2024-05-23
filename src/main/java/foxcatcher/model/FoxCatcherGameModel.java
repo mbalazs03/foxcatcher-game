@@ -14,7 +14,7 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
 
     public static final int BOARD_SIZE = 8;
     private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
-    private Player player;
+    private Player player = Player.PLAYER_1;
 
     public FoxCatcherGameModel() {
         /*
@@ -67,7 +67,6 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         for (var i = 1; i < 8; i += 2) {
             board[7][i] = new ReadOnlyObjectWrapper<>(Field.DARK);
         }
-        player = Player.PLAYER_1;
     }
 
     @Override
@@ -87,12 +86,12 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     public void makeMove(Position from, Position to) {
         setField(to, getField(from));
         setField(from, Field.EMPTY);
-        player = getNextPlayer();
+        player = player.opponent();
     }
 
     @Override
     public Player getNextPlayer() {
-        return player.opponent();
+        return player = player.opponent();
     }
 
     @Override
@@ -100,7 +99,6 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         if (isFoxTrapped(getFoxPosition())) {
             return true;
         }
-
         return isFoxBehindHounds(getFoxPosition(), getHoundPositions());
     }
 
@@ -172,10 +170,8 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     }
 
     private boolean canMoveWith(Position from) {
-        if (isFirstPlayer() && getField(from) == Field.LIGHT) {
-            return true;
-        }
-        return !isFirstPlayer() && getField(from) == Field.DARK;
+        Field field = getField(from);
+        return (isFirstPlayer() && field == Field.LIGHT) || (!isFirstPlayer() && field == Field.DARK);
     }
 
     private boolean isFoxTrapped(Position foxPosition) {

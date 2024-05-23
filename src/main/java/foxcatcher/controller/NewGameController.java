@@ -3,7 +3,12 @@ package foxcatcher.controller;
 import foxcatcher.model.FoxCatcherGameModel;
 import foxcatcher.model.Position;
 
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -11,11 +16,16 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 public class NewGameController {
     @FXML
+    public Text nameField1, nameField2;
+    private final StringProperty name1 = new SimpleStringProperty();
+    private final StringProperty name2 = new SimpleStringProperty();
+    @FXML
     private GridPane board;
-    private FoxCatcherGameModel model = new FoxCatcherGameModel();
+    private final FoxCatcherGameModel model = new FoxCatcherGameModel();
     private final FoxGameMoveSelector selector = new FoxGameMoveSelector(model);
 
 
@@ -27,6 +37,16 @@ public class NewGameController {
                 board.add(field, j, i);
             }
         }
+        nameField1.textProperty().bind(Bindings.concat(name1));
+        nameField2.textProperty().bind(Bindings.concat(name2));
+    }
+
+    public void setPlayer1Name(String name) {
+        this.name1.set(name);
+    }
+
+    public void setPlayer2Name(String name) {
+        this.name2.set(name);
     }
 
     private StackPane createField(int i, int j) {
@@ -66,4 +86,17 @@ public class NewGameController {
         }
     }
 
+    public void onNewGame(ActionEvent event) {
+    }
+
+    public void onSaveGame(ActionEvent event) {
+    }
+
+    public void onAbout(ActionEvent event) {
+    }
+
+    @FXML
+    private void onQuit() {
+        Platform.exit();
+    }
 }

@@ -5,3 +5,53 @@
 .square:hover {
     -fx-background-color: whitesmoke;
 }
+
+/* newgame.css */
+
+.menu-bar {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10;
+    -fx-spacing: 20;
+}
+
+.menu-bar .button {
+    -fx-background-color: #d4af37;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian , rgba(0, 0, 0, 0.3) , 10, 0.5 , 0 , 0 );
+}
+
+.menu-bar .button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.info-bar {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+    -fx-padding: 10;
+}
+
+.info-bar .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.info-bar .text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.region {
+    -fx-pref-width: 150px;
+}
+
+#board {
+    -fx-padding: 20;
+    -fx-hgap: 2.5;
+    -fx-vgap: 2.5;
+}

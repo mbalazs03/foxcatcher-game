@@ -14,11 +14,10 @@ public class FoxGameMoveSelector {
         READY_TO_MOVE
     }
 
-    private FoxCatcherGameModel model;
+    private final FoxCatcherGameModel model;
     private ReadOnlyObjectWrapper<Phase> phase =new ReadOnlyObjectWrapper<>(Phase.SELECT_FROM);
     private boolean invalidSelection = false;
-    private Position from;
-    private Position to;
+    private Position from, to;
 
     public FoxGameMoveSelector(FoxCatcherGameModel model) {
         this.model = model;
