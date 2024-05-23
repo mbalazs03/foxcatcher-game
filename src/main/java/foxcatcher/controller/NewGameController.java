@@ -3,6 +3,7 @@ package foxcatcher.controller;
 import foxcatcher.model.FoxCatcherGameModel;
 import foxcatcher.model.Position;
 
+import game.State;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
@@ -10,6 +11,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -17,6 +22,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class NewGameController {
     @FXML
@@ -83,8 +91,38 @@ public class NewGameController {
         selector.select(new Position(row, col));
         if (selector.isReadyToMove() && !selector.isInvalidSelection()) {
             selector.makeMove();
+            if (isEndGame()) {
+                try {
+                    showResult(event);
+                } catch (IOException e) {
+                    System.err.println("Error loading next stage.");
+                }
+            }
         }
     }
+
+    private boolean isEndGame() {
+        return model.isGameOver();
+    }
+
+    private Text winner() {
+        if (isEndGame() && model.getStatus() == State.Status.PLAYER_1_WINS) {
+            return nameField1;
+        } else {
+            return nameField2;
+        }
+    }
+
+    private void showResult(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/leaderboard.fxml"));
+        Parent root = fxmlLoader.load();
+        LeaderboardController controller = fxmlLoader.getController();
+        controller.setResultText(winner().getText());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
     public void onNewGame(ActionEvent event) {
     }
