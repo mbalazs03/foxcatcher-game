@@ -1,4 +1,4 @@
-package foxcatcher.controller;
+package foxcatcher.cli;
 
 
 import foxcatcher.model.FoxCatcherGameModel;

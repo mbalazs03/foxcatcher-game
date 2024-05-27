@@ -1,34 +1,7 @@
-.tab-pane {
-    -fx-background-color: #f2f2f2;
+.root {
+    -fx-font-size: 14;
 }
 
-.tab {
-    -fx-background-color: #d9d9d9;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-}
-
-.table-view {
-    -fx-table-cell-border-color: transparent;
-    -fx-background-color: #ffffff;
-}
-
-.table-column {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-alignment: CENTER;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: #d9d9d9;
-}
-
-.tab-pane .tab-header-background {
-    -fx-background-color: #bfbfbf;
-}
-
-.text {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-fill: #333333;
+#steps, #duration {
+    -fx-alignment: center;
 }

@@ -22,21 +22,30 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import util.javafx.EnumImageStorage;
 import util.javafx.ImageStorage;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.time.ZonedDateTime;
+
+import gameresult.TwoPlayerGameResult;
+import gameresult.manager.TwoPlayerGameResultManager;
+import gameresult.manager.json.JsonTwoPlayerGameResultManager;
+
 
 public class NewGameController {
+
     @FXML
     public Text nameField1, nameField2;
-    private final StringProperty name1 = new SimpleStringProperty();
-    private final StringProperty name2 = new SimpleStringProperty();
     @FXML
     private GridPane board;
+    private final StringProperty name1 = new SimpleStringProperty();
+    private final StringProperty name2 = new SimpleStringProperty();
     private final FoxCatcherGameModel model = new FoxCatcherGameModel();
     private final FoxGameMoveSelector selector = new FoxGameMoveSelector(model);
     private final ImageStorage<Field> imageStorage = new EnumImageStorage<>(Field.class);
@@ -112,12 +121,14 @@ public class NewGameController {
         var field = (StackPane) event.getSource();
         var row = GridPane.getRowIndex(field);
         var col = GridPane.getColumnIndex(field);
+        TwoPlayerGameResultManager manager = new JsonTwoPlayerGameResultManager(Path.of("results.json"));
         System.out.printf("Click on field (%d,%d)%n", row, col);
         selector.select(new Position(row, col));
         if (selector.isReadyToMove() && !selector.isInvalidSelection()) {
             selector.makeMove();
             if (isEndGame()) {
                 try {
+                    manager.add(createGameResult());
                     showResult(event);
                 } catch (IOException e) {
                     System.err.println("Error loading next stage.");
@@ -146,6 +157,17 @@ public class NewGameController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    private TwoPlayerGameResult createGameResult() {
+        return TwoPlayerGameResult.builder()
+                .player1Name(name1.get())
+                .player2Name(name2.get())
+                .status(model.getStatus())
+                .numberOfTurns(model.getTurns())
+                .duration(Duration.ofSeconds(model.getGameDurationInSeconds()))
+                .created(ZonedDateTime.now())
+                .build();
     }
 
 }

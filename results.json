@@ -1,0 +1,29 @@
+[ {
+  "duration" : 0.0,
+  "created" : "2024-05-27T14:19:31.3774104Z",
+  "player1Name" : "Szuper",
+  "player2Name" : "Duper",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 12
+}, {
+  "duration" : 0.0,
+  "created" : "2024-05-27T14:20:24.2099015Z",
+  "player1Name" : "Szuper",
+  "player2Name" : "Duper",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 12
+}, {
+  "duration" : 0.0,
+  "created" : "2024-05-27T14:22:14.2022386Z",
+  "player1Name" : "Szuper",
+  "player2Name" : "Duper",
+  "status" : "PLAYER_1_WINS",
+  "numberOfTurns" : 13
+}, {
+  "duration" : 0.0,
+  "created" : "2024-05-27T16:46:36.7697256+02:00",
+  "player1Name" : "David",
+  "player2Name" : "Bill",
+  "status" : "PLAYER_1_WINS",
+  "numberOfTurns" : 17
+} ]

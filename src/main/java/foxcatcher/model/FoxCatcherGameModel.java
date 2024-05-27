@@ -5,6 +5,8 @@ import game.TwoPhaseMoveState;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
+import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +17,8 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     public static final int BOARD_SIZE = 8;
     private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private Player player = Player.PLAYER_1;
+    private int turns = 0;
+    private ZonedDateTime start, end;
 
     public FoxCatcherGameModel() {
         for (var i = 0; i < BOARD_SIZE; i++) {
@@ -45,6 +49,7 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     public void makeMove(Position from, Position to) {
         setField(to, getField(from));
         setField(from, Field.EMPTY);
+        addTurn();
         player = player.opponent();
     }
 
@@ -161,6 +166,30 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
 
     public ReadOnlyObjectProperty<Field> fieldProperty(int i, int j) {
         return board[i][j].getReadOnlyProperty();
+    }
+
+    private void addTurn() {
+        turns += 1;
+    }
+
+    public int getTurns() {
+        return turns;
+    }
+
+    public void startGame() {
+        this.start = ZonedDateTime.now();
+    }
+
+    public void endGame() {
+        this.end = ZonedDateTime.now();
+    }
+
+    public long getGameDurationInSeconds() {
+        if (start != null && end != null) {
+            return Duration.between(start, end).getSeconds();
+        } else {
+            return 0;
+        }
     }
 
     @Override
