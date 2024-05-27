@@ -176,11 +176,11 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         return turns;
     }
 
-    public void startGame() {
+    public void startGameTime() {
         this.start = ZonedDateTime.now();
     }
 
-    public void endGame() {
+    public void endGameTime() {
         this.end = ZonedDateTime.now();
     }
 

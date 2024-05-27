@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.tinylog.Logger;
 
 import java.io.IOException;
 
@@ -18,6 +19,7 @@ public class NameselectionController {
     public TextField playerOneName, playerTwoName;
 
     public void startGame(ActionEvent event) throws IOException {
+        Logger.debug("Starting new game. \n Player1: {} \n Playyer2: {}", playerOneName.getText(), playerTwoName.getText());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/newgame.fxml"));
         Parent root = fxmlLoader.load();
         NewGameController controller = fxmlLoader.getController();

@@ -4,16 +4,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/leaderboard.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foxcatcher.controller.WinnerController">
-    <children>
-        <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab styleClass="tab" text="Result">
-                    <AnchorPane>
-                        <Text fx:id="resultText" layoutX="14.0" layoutY="14.0" wrappingWidth="580.0" />
-                    </AnchorPane>
-                </Tab>
-            </tabs>
-        </TabPane>
-    </children>
+<AnchorPane prefHeight="322.0" prefWidth="338.0" stylesheets="@../css/winner.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foxcatcher.controller.WinnerController">
+    <VBox alignment="CENTER" layoutX="-3.0" layoutY="-3.0" prefHeight="459.0" prefWidth="662.0" spacing="15" stylesheets="@../css/nameselection.css">
+        <Label text="Result" textFill="#665c5c">
+         <font>
+            <Font name="Calibri Bold" size="48.0" />
+         </font></Label>
+        <Text fx:id="resultText">
+         <font>
+            <Font size="26.0" />
+         </font></Text>
+        <Button mnemonicParsing="false" onAction="#onQuit" text="Quit" />
+    </VBox>
 </AnchorPane>

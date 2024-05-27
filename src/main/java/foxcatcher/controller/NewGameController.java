@@ -11,6 +11,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import org.tinylog.Logger;
 import util.javafx.EnumImageStorage;
 import util.javafx.ImageStorage;
 
@@ -61,6 +63,9 @@ public class NewGameController {
         }
         nameField1.textProperty().bind(Bindings.concat(name1));
         nameField2.textProperty().bind(Bindings.concat(name2));
+        model.startGameTime();
+        selector.phaseProperty().addListener(this::showSelectionPhaseChange);
+        Logger.debug("Game Started.");
     }
 
     @FXML
@@ -77,6 +82,7 @@ public class NewGameController {
 
     @FXML
     private void onQuit() {
+        Logger.debug("Closing the Game. :(");
         Platform.exit();
     }
 
@@ -122,19 +128,48 @@ public class NewGameController {
         var row = GridPane.getRowIndex(field);
         var col = GridPane.getColumnIndex(field);
         TwoPlayerGameResultManager manager = new JsonTwoPlayerGameResultManager(Path.of("results.json"));
-        System.out.printf("Click on field (%d,%d)%n", row, col);
+        Logger.debug("Click on field ({}, {})", row, col);
         selector.select(new Position(row, col));
         if (selector.isReadyToMove() && !selector.isInvalidSelection()) {
             selector.makeMove();
             if (isEndGame()) {
                 try {
+                    Logger.debug("Game Over, {} wins", winner().getText());
+                    model.endGameTime();
                     manager.add(createGameResult());
                     showResult(event);
                 } catch (IOException e) {
-                    System.err.println("Error loading next stage.");
+                    Logger.error("Error loading next stage: {}", e.getMessage());
                 }
             }
         }
+    }
+
+    private void showSelectionPhaseChange(ObservableValue<? extends FoxGameMoveSelector.Phase> value, FoxGameMoveSelector.Phase oldPhase, FoxGameMoveSelector.Phase newPhase) {
+        switch (newPhase) {
+            case SELECT_FROM -> {}
+            case SELECT_TO -> showSelection(selector.getFrom());
+            case READY_TO_MOVE -> hideSelection(selector.getFrom());
+        }
+    }
+
+    private void showSelection(Position position) {
+        var square = getField(position);
+        square.getStyleClass().add("selected");
+    }
+
+    private void hideSelection(Position position) {
+        var square = getField(position);
+        square.getStyleClass().remove("selected");
+    }
+
+    private StackPane getField(Position position) {
+        for (var child : board.getChildren()) {
+            if (GridPane.getRowIndex(child) == position.row() && GridPane.getColumnIndex(child) == position.col()) {
+                return (StackPane) child;
+            }
+        }
+        throw new AssertionError();
     }
 
     private boolean isEndGame() {
@@ -160,6 +195,7 @@ public class NewGameController {
     }
 
     private TwoPlayerGameResult createGameResult() {
+        Logger.debug("Result generated.");
         return TwoPlayerGameResult.builder()
                 .player1Name(name1.get())
                 .player2Name(name2.get())

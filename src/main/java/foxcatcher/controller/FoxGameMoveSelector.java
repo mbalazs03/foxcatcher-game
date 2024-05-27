@@ -5,6 +5,7 @@ import foxcatcher.model.Position;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import org.tinylog.Logger;
 
 
 public class FoxGameMoveSelector {
@@ -63,6 +64,20 @@ public class FoxGameMoveSelector {
         }
     }
 
+    public Position getFrom() {
+        if (phase.get() == Phase.SELECT_FROM) {
+            throw new IllegalStateException();
+        }
+        return from;
+    }
+
+    public Position getTo() {
+        if (phase.get() != Phase.READY_TO_MOVE) {
+            throw new IllegalStateException();
+        }
+        return to;
+    }
+
     public boolean isInvalidSelection() {
         return invalidSelection;
     }
@@ -75,7 +90,7 @@ public class FoxGameMoveSelector {
             model.makeMove(from, to);
             reset();
         } else {
-            System.err.println("Illegal move!");
+            Logger.error("Illegal move!");
         }
     }
 

@@ -3,16 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="322.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foxcatcher.controller.NameselectionController">
-   <children>
-      <VBox alignment="CENTER" layoutX="-3.0" layoutY="-3.0" prefHeight="459.0" prefWidth="662.0" spacing="15" stylesheets="@../css/nameselection.css">
-         <children>
-            <Label text="Player 1" />
-            <TextField fx:id="playerOneName" maxWidth="200" />
-            <Label text="Player 2" />
-            <TextField fx:id="playerTwoName" maxWidth="200" />
-            <Button mnemonicParsing="false" onAction="#startGame" text="Start Game" />
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="322.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="foxcatcher.controller.NameselectionController">
+   <VBox alignment="CENTER" layoutX="-3.0" layoutY="-3.0" prefHeight="459.0" prefWidth="662.0" spacing="15"
+         stylesheets="@../css/nameselection.css">
+      <Label text="Player 1"/>
+      <TextField fx:id="playerOneName" maxWidth="200"/>
+      <Label text="Player 2"/>
+      <TextField fx:id="playerTwoName" maxWidth="200"/>
+      <Button mnemonicParsing="false" onAction="#startGame" text="Start Game"/>
+   </VBox>
 </AnchorPane>

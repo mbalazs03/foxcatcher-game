@@ -25,3 +25,12 @@
 .square.dark {
     -fx-background-color: #8B4513;
 }
+
+.square:hover {
+    -fx-background-color: whitesmoke;
+}
+
+.square.selected {
+    -fx-border-width: 5;
+    -fx-border-color: slategray;
+}

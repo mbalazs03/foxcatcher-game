@@ -5,6 +5,7 @@ import foxcatcher.model.FoxCatcherGameModel;
 import foxcatcher.model.Position;
 
 import game.console.TwoPhaseMoveGame;
+import org.tinylog.Logger;
 
 import java.util.Scanner;
 
