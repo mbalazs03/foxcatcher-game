@@ -1,9 +1,11 @@
 package foxcatcher.controller;
 
+import foxcatcher.model.Field;
 import foxcatcher.model.FoxCatcherGameModel;
 import foxcatcher.model.Position;
 
 import game.State;
+
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
@@ -15,14 +17,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
+
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import util.javafx.EnumImageStorage;
+import util.javafx.ImageStorage;
 
 import java.io.IOException;
 
@@ -35,6 +39,7 @@ public class NewGameController {
     private GridPane board;
     private final FoxCatcherGameModel model = new FoxCatcherGameModel();
     private final FoxGameMoveSelector selector = new FoxGameMoveSelector(model);
+    private final ImageStorage<Field> imageStorage = new EnumImageStorage<>(Field.class);
 
 
     @FXML
@@ -49,6 +54,23 @@ public class NewGameController {
         nameField2.textProperty().bind(Bindings.concat(name2));
     }
 
+    @FXML
+    public void onNewGame(ActionEvent event) {
+    }
+
+    @FXML
+    public void onSaveGame(ActionEvent event) {
+    }
+
+    @FXML
+    public void onAbout(ActionEvent event) {
+    }
+
+    @FXML
+    private void onQuit() {
+        Platform.exit();
+    }
+
     public void setPlayer1Name(String name) {
         this.name1.set(name);
     }
@@ -60,24 +82,27 @@ public class NewGameController {
     private StackPane createField(int i, int j) {
         var field = new StackPane();
         field.getStyleClass().add("square");
-        var piece = new Circle(20);
-
-        piece.fillProperty().bind(
+        if ((i + j) % 2 == 0) {
+            field.getStyleClass().add("light");
+        } else {
+            field.getStyleClass().add("dark");
+        }
+        var imageView = new ImageView();
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
+        imageView.imageProperty().bind(
                 new ObjectBinding<>() {
                     {
                         super.bind(model.fieldProperty(i, j));
                     }
+
                     @Override
-                    protected Paint computeValue() {
-                        return switch (model.fieldProperty(i, j).get()) {
-                            case EMPTY -> Color.TRANSPARENT;
-                            case DARK -> Color.BLACK;
-                            case LIGHT -> Color.BLUE;
-                        };
+                    protected Image computeValue() {
+                        return imageStorage.get(model.fieldProperty(i, j).get()).orElse(null);
                     }
                 }
         );
-        field.getChildren().add(piece);
+        field.getChildren().add(imageView);
         field.setOnMouseClicked(this::handleMouseClick);
         return field;
     }
@@ -114,27 +139,13 @@ public class NewGameController {
     }
 
     private void showResult(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/leaderboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/winner.fxml"));
         Parent root = fxmlLoader.load();
-        LeaderboardController controller = fxmlLoader.getController();
+        WinnerController controller = fxmlLoader.getController();
         controller.setResultText(winner().getText());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-
-    public void onNewGame(ActionEvent event) {
-    }
-
-    public void onSaveGame(ActionEvent event) {
-    }
-
-    public void onAbout(ActionEvent event) {
-    }
-
-    @FXML
-    private void onQuit() {
-        Platform.exit();
-    }
 }

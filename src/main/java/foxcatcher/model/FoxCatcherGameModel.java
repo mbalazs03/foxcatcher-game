@@ -17,19 +17,6 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     private Player player = Player.PLAYER_1;
 
     public FoxCatcherGameModel() {
-        /*
-        for (var i = 0; i < BOARD_SIZE; i++) {
-            for (var j = 0; j < BOARD_SIZE; j++) {
-                board[i][j] = new ReadOnlyObjectWrapper<>(Field.EMPTY);
-            }
-        }
-        board[0][2] = new ReadOnlyObjectWrapper<>(Field.LIGHT);
-        board[7][1] = new ReadOnlyObjectWrapper<>(Field.DARK);
-        board[7][3] = new ReadOnlyObjectWrapper<>(Field.DARK);
-        board[7][5] = new ReadOnlyObjectWrapper<>(Field.DARK);
-        board[7][7] = new ReadOnlyObjectWrapper<>(Field.DARK);
-        */
-
         for (var i = 0; i < BOARD_SIZE; i++) {
             for (var j = 0; j < BOARD_SIZE; j++) {
                 board[i][j] = new ReadOnlyObjectWrapper<>(Field.EMPTY);

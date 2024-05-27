@@ -15,7 +15,7 @@ public class FoxGameMoveSelector {
     }
 
     private final FoxCatcherGameModel model;
-    private ReadOnlyObjectWrapper<Phase> phase =new ReadOnlyObjectWrapper<>(Phase.SELECT_FROM);
+    private final ReadOnlyObjectWrapper<Phase> phase =new ReadOnlyObjectWrapper<>(Phase.SELECT_FROM);
     private boolean invalidSelection = false;
     private Position from, to;
 

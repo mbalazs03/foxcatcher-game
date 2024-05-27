@@ -18,9 +18,23 @@ public class HomeController {
     @FXML
     public void onNewGame(ActionEvent actionEvent) {
         try {
-            loadStage(actionEvent);
+            loadStage(actionEvent, "nameselection");
         } catch (IOException e) {
             System.err.println("Error loading next stage!");
+        }
+    }
+
+    @FXML
+    public void onLoadGame(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    public void onLeaderBoard(ActionEvent actionEvent) {
+        try {
+            loadStage(actionEvent, "leaderboard");
+        } catch (IOException e) {
+            System.err.println("Error loading next stage");
         }
     }
 
@@ -28,9 +42,8 @@ public class HomeController {
     private void onQuit() {
         Platform.exit();
     }
-
-    private void loadStage(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/nameselection.fxml"));
+    private void loadStage(ActionEvent event, String file) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/"+ file +".fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
