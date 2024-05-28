@@ -11,6 +11,7 @@
       <TextField fx:id="playerOneName" maxWidth="200"/>
       <Label text="Player 2"/>
       <TextField fx:id="playerTwoName" maxWidth="200"/>
-      <Button mnemonicParsing="false" onAction="#startGame" text="Start Game"/>
+      <Button onAction="#startGame" styleClass="button" text="Start Game"/>
+      <Button onAction="#onBack" styleClass="button" text="Back" />
    </VBox>
 </AnchorPane>

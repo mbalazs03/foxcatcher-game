@@ -6,9 +6,12 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
+
 import org.tinylog.Logger;
 
-public class WinnerController {
+import java.io.IOException;
+
+public class WinnerController extends BaseController {
 
     @FXML
     public Text resultText;
@@ -23,8 +26,30 @@ public class WinnerController {
         this.winner.set("Winner: " + winner);
     }
 
-    public void onQuit(ActionEvent actionEvent) {
-        Logger.debug("Closing Game. :(");
+    @FXML
+    public void onNewGame(ActionEvent actionEvent) {
+        Logger.debug("New Game started.");
+        try {
+            loadStage(actionEvent, "nameselection");
+        } catch (IOException e) {
+            Logger.error("Failed to start the game!: ", e.getMessage());
+        }
+    }
+
+    @FXML
+    public void onLeaderBoard(ActionEvent actionEvent) {
+        Logger.debug("Opening leaderboard.");
+        try {
+            loadStage(actionEvent, "leaderboard");
+        } catch (IOException e) {
+            Logger.error("Failed to load Leaderboard!: ", e.getMessage());
+        }
+    }
+
+    @FXML
+    private void onQuit() {
+        Logger.debug("Closing the Game! :(");
         Platform.exit();
     }
+
 }

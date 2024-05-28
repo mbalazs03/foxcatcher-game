@@ -13,8 +13,7 @@
 <VBox xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foxcatcher.controller.NewGameController" stylesheets="@../css/newgame.css">
     <HBox prefHeight="20.0" prefWidth="200.0" spacing="10" alignment="CENTER" styleClass="menu-bar">
         <Button onAction="#onNewGame" text="New Game" />
-        <Button onAction="#onSaveGame" text="Save Game" />
-        <Button onAction="#onAbout" text="About" />
+        <Button onAction="#onBack" text="Back" />
         <Button onAction="#onQuit" text="Quit" />
     </HBox>
     <HBox prefHeight="25.0" prefWidth="600.0" spacing="10" alignment="CENTER" styleClass="info-bar">

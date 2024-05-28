@@ -40,7 +40,7 @@ import gameresult.manager.TwoPlayerGameResultManager;
 import gameresult.manager.json.JsonTwoPlayerGameResultManager;
 
 
-public class NewGameController {
+public class NewGameController extends BaseController {
 
     @FXML
     public Text nameField1, nameField2;
@@ -69,21 +69,23 @@ public class NewGameController {
     }
 
     @FXML
-    public void onNewGame(ActionEvent event) {
-    }
-
-    @FXML
-    public void onSaveGame(ActionEvent event) {
-    }
-
-    @FXML
-    public void onAbout(ActionEvent event) {
+    public void onNewGame(ActionEvent actionEvent) {
+        Logger.debug("New Game started.");
+        try {
+            loadStage(actionEvent, "nameselection");
+        } catch (IOException e) {
+            Logger.error("Failed to start the game!: ", e.getMessage());
+        }
     }
 
     @FXML
     private void onQuit() {
-        Logger.debug("Closing the Game. :(");
+        Logger.debug("Closing the Game! :(");
         Platform.exit();
+    }
+
+    @FXML
+    public void onAbout(ActionEvent event) {
     }
 
     public void setPlayer1Name(String name) {
@@ -206,4 +208,12 @@ public class NewGameController {
                 .build();
     }
 
+    public void onBack(ActionEvent actionEvent) {
+        Logger.debug("Opening Home page.");
+        try {
+            loadStage(actionEvent, "home");
+        } catch (IOException e) {
+            Logger.error("Failed to load Home page!: ", e.getMessage());
+        }
+    }
 }

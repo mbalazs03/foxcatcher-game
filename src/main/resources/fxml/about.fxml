@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="322.0" prefWidth="338.0" stylesheets="@../css/winner.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="foxcatcher.controller.NameselectionController">
+    <VBox alignment="CENTER" layoutX="-3.0" layoutY="-3.0" prefHeight="459.0" prefWidth="662.0" spacing="15" stylesheets="@../css/nameselection.css">
+        <Label text="About" textFill="#665c5c">
+            <font>
+                <Font name="Calibri Bold" size="48.0" />
+            </font>
+        </Label>
+      <Label text="Fox Catcher Game">
+         <font>
+            <Font name="Calibri" size="36.0" />
+         </font></Label>
+      <Label text="Developer: Margitai Balázs">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font></Label>
+      <Label text="University of Debrecen">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font></Label>
+      <Label text="2024">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font></Label>
+      <Button onAction="#onBack" text="Back" />
+    </VBox>
+</AnchorPane>

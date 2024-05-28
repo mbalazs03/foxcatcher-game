@@ -77,9 +77,51 @@
   "numberOfTurns" : 12
 }, {
   "duration" : 10.000000000,
-  "created" : "2024-05-27T18:44:31.9991563+02:00",
+  "created" : "2024-05-27T16:44:31.9991563Z",
   "player1Name" : "Jobb",
   "player2Name" : "Bal",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 12
+}, {
+  "duration" : 33.000000000,
+  "created" : "2024-05-28T09:00:38.0493503Z",
+  "player1Name" : "Sub",
+  "player2Name" : "Dub",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 12
+}, {
+  "duration" : 15.000000000,
+  "created" : "2024-05-28T09:32:26.6734124Z",
+  "player1Name" : "Bal",
+  "player2Name" : "Jobb",
+  "status" : "PLAYER_1_WINS",
+  "numberOfTurns" : 14
+}, {
+  "duration" : 12.000000000,
+  "created" : "2024-05-28T09:50:24.4470601Z",
+  "player1Name" : "Szuper",
+  "player2Name" : "Duper",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 12
+}, {
+  "duration" : 12.000000000,
+  "created" : "2024-05-28T09:51:21.3279559Z",
+  "player1Name" : "Szuper",
+  "player2Name" : "Duper",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 12
+}, {
+  "duration" : 8.000000000,
+  "created" : "2024-05-28T10:09:07.1928593Z",
+  "player1Name" : "Szuper",
+  "player2Name" : "Duper",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 12
+}, {
+  "duration" : 20.000000000,
+  "created" : "2024-05-28T12:17:28.1504887+02:00",
+  "player1Name" : "Subi ",
+  "player2Name" : "Dubi",
   "status" : "PLAYER_2_WINS",
   "numberOfTurns" : 12
 } ]
