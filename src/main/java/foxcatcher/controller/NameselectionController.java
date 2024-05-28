@@ -41,7 +41,7 @@ public class NameselectionController extends BaseController {
 
     @FXML
     public void onBack(ActionEvent actionEvent) {
-        Logger.debug("Opening Home.");
+        Logger.debug("Opening Home page.");
         try {
             loadStage(actionEvent, "home");
         } catch (IOException e) {

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BaseController {
+class BaseController {
     protected void loadStage(ActionEvent event, String file) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/"+ file +".fxml"));
         Parent root = fxmlLoader.load();

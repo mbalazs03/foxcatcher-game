@@ -9,7 +9,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ *  The FoxGameApplication class is the main entry point for the JavaFX application.
+ */
 public class FoxGameApplication extends Application {
+    /**
+     * Starts the JavaFX application.
+     *
+     * @param stage The primary stage for the applicaation.
+     * @throws IOException if the FXML file cannot be loaded.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/home.fxml")));

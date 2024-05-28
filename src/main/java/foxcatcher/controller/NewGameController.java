@@ -39,9 +39,7 @@ import gameresult.TwoPlayerGameResult;
 import gameresult.manager.TwoPlayerGameResultManager;
 import gameresult.manager.json.JsonTwoPlayerGameResultManager;
 
-
 public class NewGameController extends BaseController {
-
     @FXML
     public Text nameField1, nameField2;
     @FXML
@@ -51,7 +49,6 @@ public class NewGameController extends BaseController {
     private final FoxCatcherGameModel model = new FoxCatcherGameModel();
     private final FoxGameMoveSelector selector = new FoxGameMoveSelector(model);
     private final ImageStorage<Field> imageStorage = new EnumImageStorage<>(Field.class);
-
 
     @FXML
     private void initialize() {
@@ -82,10 +79,6 @@ public class NewGameController extends BaseController {
     private void onQuit() {
         Logger.debug("Closing the Game! :(");
         Platform.exit();
-    }
-
-    @FXML
-    public void onAbout(ActionEvent event) {
     }
 
     public void setPlayer1Name(String name) {

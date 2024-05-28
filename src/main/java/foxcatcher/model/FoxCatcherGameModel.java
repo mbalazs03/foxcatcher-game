@@ -12,14 +12,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents the state and logic of the FoxCatcher game.
+ */
 public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
 
+    /**
+     * The size of the game board.
+     */
     public static final int BOARD_SIZE = 8;
     private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private Player player = Player.PLAYER_1;
     private int turns = 0;
     private ZonedDateTime start, end;
 
+    /**
+     * Initializes a new game model with an empty board, a light piece at (0,2), and dark pieces at (7,1), (7,3), (7,5), and (7,7).
+     */
     public FoxCatcherGameModel() {
         for (var i = 0; i < BOARD_SIZE; i++) {
             for (var j = 0; j < BOARD_SIZE; j++) {
@@ -32,11 +41,24 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         }
     }
 
+    /**
+     * Checks if the move from the specified {@link Position} is legal.
+     *
+     * @param from The {@link Position} to move from.
+     * @return True if the move is legal, false otherwise.
+     */
     @Override
     public boolean isLegalToMoveFrom(Position from) {
         return isOnBoard(from) && !isEmpty(from) && canMoveWith(from) && !isGameOver();
     }
 
+    /**
+     * Checks if the move from the specified {@link Position} to another {@link Position} is legal.
+     *
+     * @param from The {@link Position} to move from.
+     * @param to The {@link Position} to move to.
+     * @return True if the move is legal, false otherwise.
+     */
     @Override
     public boolean isLegalMove(Position from, Position to) {
         if (isFirstPlayer()) {
@@ -45,6 +67,11 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
             return isLegalToMoveFrom(from) && isOnBoard(to) && isEmpty(to) && isHoundMove(from, to);
     }
 
+    /**
+     * Executes a move from one {@link Position} to another.
+     * @param from The {@link Position} to move from.
+     * @param to The {@link Position} to move to.
+     */
     @Override
     public void makeMove(Position from, Position to) {
         setField(to, getField(from));
@@ -53,11 +80,21 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         player = player.opponent();
     }
 
+    /**
+     * Gets the {@link game.State.Player} who should make the next move.
+     *
+     * @return The next player.
+     */
     @Override
     public Player getNextPlayer() {
         return player = player.opponent();
     }
 
+    /**
+     * Checks if the game is over.
+     *
+     * @return True if the game is over, false otherwise.
+     */
     @Override
     public boolean isGameOver()  {
         if (isFoxTrapped(getFoxPosition())) {
@@ -66,6 +103,9 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         return isFoxBehindHounds(getFoxPosition(), getHoundPositions());
     }
 
+    /**
+     * @return The current game {@link game.State.Status}.
+     */
     @Override
     public Status getStatus() {
         if (!isGameOver()) {
@@ -74,10 +114,22 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         return isGameOver() && isFoxBehindHounds(getFoxPosition(), getHoundPositions()) ? Status.PLAYER_1_WINS : Status.PLAYER_2_WINS;
     }
 
+    /**
+     * Checks if the specified {@link Position} is empty.
+     *
+     * @param p The {@link Position} to check.
+     * @return True if the {@link Position} is empty, false otherwise.
+     */
     public boolean isEmpty(Position p) {
         return getField(p) == Field.EMPTY;
     }
 
+    /**
+     * Gets the {@link Field} value at the specified {@link Position}.
+     *
+     * @param p The {@link Position} to get the {@link Field} value from.
+     * @return The {@link Field} value at the specified {@link Position}.
+     */
     public Field getField(Position p) {
         return board[p.row()][p.col()].get();
     }
@@ -109,17 +161,18 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         return positions;
     }
 
-    public static boolean isOnBoard(Position p) {
+
+    private static boolean isOnBoard(Position p) {
         return 0 <=p.row() && p.row() < BOARD_SIZE && 0 <= p.col() && p.col() < BOARD_SIZE;
     }
 
-    public static boolean isFoxMove(Position from, Position to) {
+    private static boolean isFoxMove(Position from, Position to) {
         var dx = Math.abs(to.row() - from.row());
         var dy = Math.abs(to.col() - from.col());
         return dx * dy == 1;
     }
 
-    public static boolean isHoundMove(Position from, Position to) {
+    private static boolean isHoundMove(Position from, Position to) {
         var dx = to.row() - from.row();
         var dy = Math.abs(to.col() - from.col());
         if (dx < 0) {
@@ -164,6 +217,12 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         return hounds == 4;
     }
 
+    /**
+     * Gets a {@link ReadOnlyObjectProperty} for the {@link Field} at the specified coordinates.
+     * @param i The row index.
+     * @param j The column index.
+     * @return A {@link ReadOnlyObjectProperty} for the {@link Field} at the specified coordinates.
+     */
     public ReadOnlyObjectProperty<Field> fieldProperty(int i, int j) {
         return board[i][j].getReadOnlyProperty();
     }
@@ -172,18 +231,32 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         turns += 1;
     }
 
+    /**
+     * Gets the number of turns taken so far.
+     * @return The number of turns.
+     */
     public int getTurns() {
         return turns;
     }
 
+    /**
+     * Records the start time of the game.
+     */
     public void startGameTime() {
         this.start = ZonedDateTime.now();
     }
 
+    /**
+     * Records the end time of the game.
+     */
     public void endGameTime() {
         this.end = ZonedDateTime.now();
     }
 
+    /**
+     * Gets the duration of the game in seconds.
+     * @return The duration of the game in seconds.
+     */
     public long getGameDurationInSeconds() {
         if (start != null && end != null) {
             return Duration.between(start, end).getSeconds();

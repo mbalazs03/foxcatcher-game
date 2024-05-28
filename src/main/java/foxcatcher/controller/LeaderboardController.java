@@ -60,7 +60,4 @@ public class LeaderboardController extends BaseController {
 
     }
 
-    @FXML
-    public void onAbout(ActionEvent actionEvent) {
-    }
 }

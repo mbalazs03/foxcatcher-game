@@ -11,7 +11,7 @@ import java.io.IOException;
 public class HomeController extends BaseController {
     @FXML
     public void onNewGame(ActionEvent actionEvent) {
-        Logger.debug("New Game started.");
+        Logger.debug("New Game created.");
         try {
             loadStage(actionEvent, "nameselection");
         } catch (IOException e) {

@@ -5,13 +5,28 @@ import foxcatcher.model.Position;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+
 import org.tinylog.Logger;
 
-
+/**
+ * The {@link FoxGameMoveSelector} class manages the process of selecting and making moves in the FoxCatcher game.
+ */
 public class FoxGameMoveSelector {
+    /**
+     * Enum representing the phases of move selection.
+     */
     public enum Phase {
+        /**
+         * {@link Phase} to select the piece to move.
+         */
         SELECT_FROM,
+        /**
+         * {@link Phase} to select the piece to move.
+         */
         SELECT_TO,
+        /**
+         * {@link Phase} indicating readiness to make a move.
+         */
         READY_TO_MOVE
     }
 
@@ -20,23 +35,48 @@ public class FoxGameMoveSelector {
     private boolean invalidSelection = false;
     private Position from, to;
 
+    /**
+     * Constructor for {@link FoxGameMoveSelector}
+     *
+     * @param model The game model to interact with.
+     */
     public FoxGameMoveSelector(FoxCatcherGameModel model) {
         this.model = model;
     }
 
+    /**
+     * Gets the current {@link Phase} of the move selection.
+     *
+     * @return The current {@link Phase}.
+     */
     public Phase getPhase() {
         return phase.get();
     }
 
-    public ReadOnlyObjectProperty<Phase> phaseProperty() {
+    /**
+     * Gets the {@link ReadOnlyObjectProperty} of the current phase.
+     *
+     * @return The {@link ReadOnlyObjectProperty} {@link Phase} property.
+     */
+    ReadOnlyObjectProperty<Phase> phaseProperty() {
         return phase.getReadOnlyProperty();
     }
 
+    /**
+     * Checks if the selector is ready to make a move.
+     *
+     * @return True if ready to move, false otherwise.
+     */
     public boolean isReadyToMove() {
         return getPhase() == Phase.READY_TO_MOVE;
     }
 
-    public void select(Position position) {
+    /**
+     * Selects a {@link Position} on the board based on the current {@link Phase}.
+     *
+     * @param position The {@link Position} to select.
+     */
+    protected void select(Position position) {
         switch (phase.get()) {
             case SELECT_FROM -> selectFrom(position);
             case SELECT_TO -> selectTo(position);
@@ -64,6 +104,12 @@ public class FoxGameMoveSelector {
         }
     }
 
+    /**
+     * Gets the starting {@link Position} of the move.
+     *
+     * @return The starting {@link Position}.
+     * @throws IllegalStateException if the current phase is SELECT_FROM.
+     */
     public Position getFrom() {
         if (phase.get() == Phase.SELECT_FROM) {
             throw new IllegalStateException();
@@ -71,6 +117,12 @@ public class FoxGameMoveSelector {
         return from;
     }
 
+    /**
+     * Gets the destination {@link Position} of the move.
+     *
+     * @return The destination {@link Position}.
+     * @throws IllegalStateException if the current {@link Phase} is not READY_TO_MOVE.
+     */
     public Position getTo() {
         if (phase.get() != Phase.READY_TO_MOVE) {
             throw new IllegalStateException();
@@ -78,10 +130,20 @@ public class FoxGameMoveSelector {
         return to;
     }
 
+    /**
+     * Checks if the last selection was invalid.
+     *
+     * @return True if the selection was invalid, false otherwise.
+     */
     public boolean isInvalidSelection() {
         return invalidSelection;
     }
 
+    /**
+     * Makes the move from the selected starting {@link Position} to the destination {@link Position}.
+     *
+     * @throws IllegalStateException if the current {@link Phase} is not READY_TO_MOVE.
+     */
     public void makeMove() {
         if (getPhase() != Phase.READY_TO_MOVE) {
             throw new IllegalStateException();
@@ -94,6 +156,9 @@ public class FoxGameMoveSelector {
         }
     }
 
+    /**
+     * Resets the move selector to its initial state.
+     */
     public void reset() {
         from = null;
         to = null;
