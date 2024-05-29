@@ -147,9 +147,16 @@
   "numberOfTurns" : 12
 }, {
   "duration" : 55.000000000,
-  "created" : "2024-05-28T18:02:36.8459988+02:00",
+  "created" : "2024-05-28T16:02:36.8459988Z",
   "player1Name" : "Bal",
   "player2Name" : "Jobb",
   "status" : "PLAYER_2_WINS",
   "numberOfTurns" : 16
+}, {
+  "duration" : 41.000000000,
+  "created" : "2024-05-29T12:50:55.9957818+02:00",
+  "player1Name" : "Jobb",
+  "player2Name" : "Bal",
+  "status" : "PLAYER_2_WINS",
+  "numberOfTurns" : 28
 } ]

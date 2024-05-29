@@ -4,6 +4,7 @@ import game.TwoPhaseMoveState;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import lombok.Getter;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
@@ -23,6 +24,11 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     public static final int BOARD_SIZE = 8;
     private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
     private Player player;
+    /**
+     * -- GETTER --
+     *  Gets the number of turns taken so far.
+     */
+    @Getter
     private int turns = 0;
     ZonedDateTime start;
     ZonedDateTime end;
@@ -232,14 +238,6 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
 
     private void addTurn() {
         turns += 1;
-    }
-
-    /**
-     * Gets the number of turns taken so far.
-     * @return The number of turns.
-     */
-    public int getTurns() {
-        return turns;
     }
 
     /**

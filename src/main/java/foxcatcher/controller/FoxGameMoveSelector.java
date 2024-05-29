@@ -6,6 +6,7 @@ import foxcatcher.model.Position;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
+import lombok.Getter;
 import org.tinylog.Logger;
 
 /**
@@ -32,6 +33,11 @@ public class FoxGameMoveSelector {
 
     private final FoxCatcherGameModel model;
     private final ReadOnlyObjectWrapper<Phase> phase =new ReadOnlyObjectWrapper<>(Phase.SELECT_FROM);
+    /**
+     * -- GETTER --
+     *  Checks if the last selection was invalid.
+     */
+    @Getter
     private boolean invalidSelection = false;
     private Position from, to;
 
@@ -115,28 +121,6 @@ public class FoxGameMoveSelector {
             throw new IllegalStateException();
         }
         return from;
-    }
-
-    /**
-     * Gets the destination {@link Position} of the move.
-     *
-     * @return The destination {@link Position}.
-     * @throws IllegalStateException if the current {@link Phase} is not READY_TO_MOVE.
-     */
-    public Position getTo() {
-        if (phase.get() != Phase.READY_TO_MOVE) {
-            throw new IllegalStateException();
-        }
-        return to;
-    }
-
-    /**
-     * Checks if the last selection was invalid.
-     *
-     * @return True if the selection was invalid, false otherwise.
-     */
-    public boolean isInvalidSelection() {
-        return invalidSelection;
     }
 
     /**
