@@ -12,7 +12,6 @@ import org.tinylog.Logger;
 import java.io.IOException;
 
 public class WinnerController extends BaseController {
-
     @FXML
     public Text resultText;
     private final StringProperty winner = new SimpleStringProperty();

@@ -209,4 +209,5 @@ public class NewGameController extends BaseController {
             Logger.error("Failed to load Home page!: ", e.getMessage());
         }
     }
+
 }

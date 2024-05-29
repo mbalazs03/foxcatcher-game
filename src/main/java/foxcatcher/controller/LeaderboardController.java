@@ -18,18 +18,13 @@ import org.tinylog.Logger;
 
 public class LeaderboardController extends BaseController {
     private static final int NUMBER_OF_ROWS_TO_SHOW = 15;
-
     @FXML
     private TableView<TwoPlayerGameResultManager.Wins> leaderBoardTable;
-
     @FXML
     private TableColumn<TwoPlayerGameResultManager.Wins, String> playerColumn;
-
     @FXML
     private TableColumn<TwoPlayerGameResultManager.Wins, Integer> scoreColumn;
     private final FoxCatcherGameModel model = new FoxCatcherGameModel();
-
-
 
     @FXML
     private void initialize() throws IOException {
@@ -57,7 +52,6 @@ public class LeaderboardController extends BaseController {
                 Logger.error("Failed to load Home page!: ", e.getMessage());
             }
         }
-
     }
 
 }

@@ -16,7 +16,7 @@ public class FoxGameApplication extends Application {
     /**
      * Starts the JavaFX application.
      *
-     * @param stage The primary stage for the applicaation.
+     * @param stage The primary stage for the application.
      * @throws IOException if the FXML file cannot be loaded.
      */
     @Override

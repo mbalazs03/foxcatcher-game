@@ -22,9 +22,10 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
      */
     public static final int BOARD_SIZE = 8;
     private final ReadOnlyObjectWrapper<Field>[][] board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
-    private Player player = Player.PLAYER_1;
+    private Player player;
     private int turns = 0;
-    private ZonedDateTime start, end;
+    ZonedDateTime start;
+    ZonedDateTime end;
 
     /**
      * Initializes a new game model with an empty board, a light piece at (0,2), and dark pieces at (7,1), (7,3), (7,5), and (7,7).
@@ -39,6 +40,7 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         for (var i = 1; i < 8; i += 2) {
             board[7][i] = new ReadOnlyObjectWrapper<>(Field.DARK);
         }
+        player = Player.PLAYER_1;
     }
 
     /**
@@ -63,8 +65,9 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     public boolean isLegalMove(Position from, Position to) {
         if (isFirstPlayer()) {
             return isLegalToMoveFrom(from) && isOnBoard(to) && isEmpty(to) && isFoxMove(from, to);
-        } else
+        } else {
             return isLegalToMoveFrom(from) && isOnBoard(to) && isEmpty(to) && isHoundMove(from, to);
+        }
     }
 
     /**
@@ -81,13 +84,13 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
     }
 
     /**
-     * Gets the {@link game.State.Player} who should make the next move.
+     * Gets the {@link game.State.Player} who should make the move.
      *
-     * @return The next player.
+     * @return The player.
      */
     @Override
     public Player getNextPlayer() {
-        return player = player.opponent();
+        return player;
     }
 
     /**
@@ -302,4 +305,5 @@ public class FoxCatcherGameModel implements TwoPhaseMoveState<Position> {
         }
         return stringBuilder.toString();
     }
+
 }

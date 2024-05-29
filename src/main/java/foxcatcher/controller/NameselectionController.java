@@ -16,14 +16,13 @@ import java.io.IOException;
 
 
 public class NameselectionController extends BaseController {
-
     @FXML
     public TextField playerOneName, playerTwoName;
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
         if (!(playerOneName.getText().isEmpty()) && !(playerTwoName.getText().isEmpty())) {
-            Logger.debug("Starting new game. \n Player1: {} \n Playyer2: {}", playerOneName.getText(), playerTwoName.getText());
+            Logger.debug("Starting new game. \n Player1: {} \n Player2: {}", playerOneName.getText(), playerTwoName.getText());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/newgame.fxml"));
             Parent root = fxmlLoader.load();
             NewGameController controller = fxmlLoader.getController();
@@ -36,7 +35,6 @@ public class NameselectionController extends BaseController {
             Logger.debug("There are no player names!");
             Platform.runLater(this::showGameAlert);
         }
-
     }
 
     @FXML
@@ -55,4 +53,5 @@ public class NameselectionController extends BaseController {
         alert.setContentText("The player names could not be empty!");
         alert.showAndWait();
     }
+
 }
