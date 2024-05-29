@@ -8,3 +8,54 @@ The game is played on a chessboard with 4 dark pawns (hounds) and 1 light pawn (
 
 The player controlling the fox wins if they maneuver the fox behind the hounds. The player controlling the hounds wins if they trap the fox in a position where it cannot move.
 
+## A possible game for the console application
+
+- PLAYER_1' move [from]: 0 2
+
+- PLAYER_1' move [to]: 1 1
+
+- PLAYER_2' move [from]: 7 1
+
+- PLAYER_2' move [to]: 6 0
+
+- PLAYER_1' move [from]: 1 1
+
+- PLAYER_1' move [to]: 0 0
+
+- PLAYER_2' move [from]: 6 0
+
+- PLAYER_2' move [to]: 5 1
+
+- PLAYER_1' move [from]: 0 0
+
+- PLAYER_1' move [to]: 1 1
+
+- PLAYER_2' move [from]: 5 1
+
+- PLAYER_2' move [to]: 4 0
+
+- PLAYER_1' move [from]: 1 1
+
+- PLAYER_1' move [to]: 0 0
+
+- PLAYER_2' move [from]: 4 0
+
+- PLAYER_2' move [to]: 3 1
+
+- PLAYER_1' move [from]: 0 0
+
+- PLAYER_1' move [to]: 1 1
+
+- PLAYER_2' move [from]: 3 1
+
+- PLAYER_2' move [to]: 2 0
+
+- PLAYER_1' move [from]: 1 1
+
+- PLAYER_1' move [to]: 0 0
+
+- PLAYER_2' move [from]: 2 0
+
+- PLAYER_2' move [to]: 1 1
+
+- PLAYER_2 won
