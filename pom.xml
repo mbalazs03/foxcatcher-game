@@ -30,7 +30,7 @@
         <jacoco.version>0.8.12</jacoco.version>
         <maven.checkstyle.version>3.3.1</maven.checkstyle.version>
         <maven.surefire.version>3.2.5</maven.surefire.version>
-        <exec.mainClass>Main</exec.mainClass>
+        <exec.mainClass>foxcatcher.view.Main</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
